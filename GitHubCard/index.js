@@ -3,6 +3,9 @@
            https://api.github.com/users/<your name>
 */
 
+axios.get('https://api.github.com/users/Jnmendza')
+  
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -14,6 +17,10 @@
            create a new component and add it to the DOM as a child of .cards
 */
 
+const followersArray = [];
+
+
+
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -24,7 +31,6 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -43,8 +49,62 @@ const followersArray = [];
     <p>Bio: {users bio}</p>
   </div>
 </div>
-
 */
+// const cards = document.querySelector('.cards')
+
+const cardCreator = (event) => {
+  // CREATE ELEMENTS
+  const card = document.createElement('div'),
+        image = document.createElement('img'),
+        cardInfo = document.createElement('div'),
+        header = document.createElement('h3'),
+        username = document.createElement('p'),
+        location = document.createElement('p'),
+        profile = document.createElement('p'),
+        proLink = document.createElement('a'),
+        followers = document.createElement('p'),
+        following = document.createElement('p'),
+        bio = document.createElement('p')
+
+  // ADD CONTENT
+  image.src = event.data.avatar_url;
+  header.textContent = event.data.name;
+  username.textContent = event.data.login;
+  location.textContent = `Location: ${event.data.location}`;
+  profile.textContent = event.data.html_url;
+  proLink.textContent = 'test name';
+  followers.textContent = `Followers: ${event.data.bio}`;
+  following.textContent = 'test name';
+  bio.textContent = 'test name';
+  // ADD CLASSES
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  header.classList.add('name');
+  username.classList.add('username');
+  // ADD APPEND
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(header);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(proLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  profile.setAttribute('href', event.data.html_url);
+
+return card
+}
+
+
+
+
+
+
+
+ 
 
 /* List of LS Instructors Github username's: 
   tetondan
